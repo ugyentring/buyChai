@@ -3,24 +3,20 @@ import abi from "./contractJSON/chai.json";
 
 const App = () => {
   const template = async () => {
-    const contractAddress = "0x8775bBC2592baC1db083dc1FCC6F18753C23Ff87";
+    const contractAddress = "0x9fFF6319f0472820F7f9662E38C1276807CfdB4b";
     const contractABI = abi.abi;
     try {
       // Metamask to do transactions
       const { ethereum } = window;
 
-      const account = await ethereum.request({
+      await ethereum.request({
         method: "eth_requestAccounts",
       });
 
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      );
+      new ethers.Contract(contractAddress, contractABI, signer);
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +24,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <button onClick={template}></button>
+      <button onClick={template}>Pay</button>
     </div>
   );
 };
